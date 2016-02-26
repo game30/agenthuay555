@@ -1,0 +1,26 @@
+/* CSS Document */
+.modal {
+  text-align: center;
+  padding: 0!important;
+}
+
+.modal:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -4px; /* Adjusts for spacing */
+}
+
+.modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+}
+label.error,label.error{
+color:red;
+}
+input.error,input.error {
+border:1px solid red;
+}
+
