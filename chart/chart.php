@@ -1,21 +1,32 @@
 <?php 
 include (dirname(__FILE__)."/phpchartdir.php");
-include (dirname(__FILE__)."../config/config_db.php");
-# In this example, we simply use random data for the 3 data series.
-$r = new RanSeries(129);
-$data0 = $r->getSeries(100, 100, -15, 15);
-$timeStamps = $r->getDateSeries(100, chartTime(2014, 1, 1), 86400);
+include "../config/config_db.php";
+include "../config/config.inc.php";
 
-# Create a XYChart object of size 600 x 400 pixels
-$c = new XYChart(600, 400);
+$dbconn = new connect_db;
+$mysqli = $dbconn->conn();
+$strSQL = "SELECT * ,SUM(bill_bet) AS betplay
+			FROM tb_bill 
+			WHERE lot_type_id = 7
+			GROUP BY tb_bill.bill_number ";
+$res = $mysqli->query($strSQL);
+$numarray = 0;
+$data = array();
+$labels = array();
 
-# Add a title box using grey (0x555555) 20pt Arial font
-$c->addTitle("    Multi-Line Chart Demonstration", "arial.ttf", 20, 0x555555);
-
-# Set the plotarea at (70, 70) and of size 500 x 300 pixels, with transparent background and border
-# and light grey (0xcccccc) horizontal grid lines
-$c->setPlotArea(70, 70, 500, 300, Transparent, -1, Transparent, 0xcccccc);
-
+while($row = $res->fetch_array(MYSQLI_ASSOC))
+{
+	$data[$numarray] = $row['betplay'];
+	$labels[$numarray] = ''.$row['bill_number'];
+	$numarray ++;
+}
+# Create a XYChart object of size 300 x 180 pixels, with a pale yellow (0xffffc0) background, a
+# black border, and 1 pixel 3D border effect.
+$c = new XYChart(800, 250, Transparent,	Transparent, 0);
+$c->addTitle("รายงานการซื้อหวย 3 ตัวบน", "Tahoma.ttf", 14, 0x555555);
+# Set the plotarea at (45, 35) and of size 240 x 120 pixels, with white background. Turn on both
+# horizontal and vertical grid lines with light grey color (0xc0c0c0)
+$c->setPlotArea(60, 30, 700,180, 0xffffff, -1, -1, 0xc0c0c0, -1);
 # Add a legend box with horizontal layout above the plot area at (70, 35). Use 12pt Arial font,
 # transparent background and border, and line style legend icon.
 $b = $c->addLegend(70, 35, false, "arial.ttf", 12);
@@ -23,8 +34,7 @@ $b->setBackground(Transparent, Transparent);
 $b->setLineStyleKey();
 
 # Set axis label font to 12pt Arial
-$c->xAxis->setLabelStyle("arial.ttf", 12);
-$c->yAxis->setLabelStyle("arial.ttf", 12);
+$c->xAxis->setLabelStyle("arial.ttf", 10);
 
 # Set the x and y axis stems to transparent, and the x-axis tick color to grey (0xaaaaaa)
 $c->xAxis->setColors(Transparent, TextColor, TextColor, 0xaaaaaa);
@@ -38,17 +48,29 @@ $c->xAxis->setTickDensity(80);
 $c->yAxis->setTickDensity(40);
 
 # Add a title to the y axis using dark grey (0x555555) 14pt Arial font
-$c->yAxis->setTitle("Y-Axis Title Placeholder", "arial.ttf", 14, 0x555555);
+$c->yAxis->setTitle("(บาท)", "Tahoma.ttf", 10, 0x555555);
 
 # Add a line layer to the chart with 3-pixel line width
 $layer = $c->addLineLayer2();
 $layer->setLineWidth(3);
 
 # Add 3 data series to the line layer
-$layer->addDataSet($data0, 0x5588cc, "Alpha");
+$dataSetObj = $layer->addDataSet($data, 0x5588cc, "Alpha");
 
-# The x-coordinates for the line layer
-$layer->setXData($timeStamps);
+/************/
+# Set the labels on the x axis
+$c->xAxis->setLabels($labels);
+$c->xAxis->setLabelStyle("Tahoma.ttf", 8, 0x000000,45);
+$c->xAxis->setTitle("(เลข)", "Tahoma.ttf", 10, 0x555555);
+
+$dataSetObj->setDataSymbol(CircleShape, 7);
+
+
+
+# Enable data label on the data points. Set the label format to nn%.
+$layer->setDataLabelFormat("{value|,.} บาท");
+$layer->setDataLabelStyle("Tahoma.ttf", 7, 0x000000,45);
+/***********/
 
 # Output the chart
 header("Content-type: image/png");
