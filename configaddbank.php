@@ -1,4 +1,5 @@
 <?php 
+ะำะำ
 	session_start();
 	include (dirname(__FILE__)."/config/config_db.php");
 	include (dirname(__FILE__)."/config/config.inc.php");
