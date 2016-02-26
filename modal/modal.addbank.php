@@ -27,17 +27,7 @@
 	}
 ?>
 <script type="text/javascript" src="js/validate.js"></script>
-<script type="text/javascript">
-$(document).ready(function(e) {
-	
-	
-	
-	
-	
-	
-	
-});
-</script>
+
 <form>
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -48,7 +38,7 @@ $(document).ready(function(e) {
     	<div class="addbank_loading-progress"></div>
     </div>
     <div id="modal_alert_msg" class="alert alert-success" style="padding:10px;">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" id="close_alert">
           <span aria-hidden="true">&times;</span>
         </button>
         บันทึกเรียบร้อยแล้ว

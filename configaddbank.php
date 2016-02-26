@@ -32,6 +32,7 @@
 <script language="javascript">
 $(document).ready(function(){
 	var progress ="" ;
+	var page ="1" ;
 	
 	function loading_show(){
 		$('#modalprogress').modal('show');
@@ -46,7 +47,7 @@ $(document).ready(function(){
 	
 	function loadData(page){
 		//alert(page)
-		loading_show();                    
+		                   
 		$.ajax({
 			type: "POST",
 			url: "ajax/ajax.lisbank.php",
@@ -72,7 +73,8 @@ $(document).ready(function(){
 			});
 	}
 	$(document).on( "click",'#container .pagination li', function() {
-		var page = $(this).attr('p');
+		loading_show(); 
+		page = $(this).attr('p');
 		loadData(page);
 	});
 	loadData($("#page_num").val());  // For first time page load default results
@@ -93,9 +95,7 @@ $(document).ready(function(){
 		$("#modal").modal('show');
 		
     });
-	
 
-	
 	
 	$(document).on("click","#edit_bank",function(e){
 		$("#modal-content").html('');
@@ -128,14 +128,12 @@ $(document).ready(function(){
 			progress.progressTimer('complete', {
 				onFinish: function () {
 					$('#modal_addbank_progress').hide();
-					$("#modal_alert_msg").show()
-					.on('closed.bs.alert','#modal_alert_msg',function (e) {
-						$("#bank_name").val('');
-						$("#b_number").val('');
-					});
+					$("#modal_alert_msg").show();
+					$("#bank_name").val('');
+					$("#b_number").val('');		
 				}
 			});
-			loadData(1);
+			loadData(page);
 		});
     });
 
