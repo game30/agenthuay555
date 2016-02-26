@@ -1,26 +1,3 @@
-<?php
-	session_start(); 
-	include (dirname(__FILE__)."/config/config_db.php");
-	include (dirname(__FILE__)."/config/config.inc.php");
-	
-	$dbconn = new connect_db;
-	$mysqli = $dbconn->conn();
-	
-	$json_data;
-	if(isset($_SESSION['userid']))
-	{
-		if($_SESSION['name']!= $site_url)
-		{
-			header( "location: index.php" );
-			exit(0);
-		}
-	}
-	else
-	{
-		header( "location: login.php" );
-		exit(0);
-	}
-?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/template.dwt.php" codeOutsideHTMLIsLocked="false" -->
 <head>
@@ -34,7 +11,11 @@
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="js/bootstrap.js"></script>
 <!-- InstanceBeginEditable name="head" -->
-<script src="js/listregister.js"></script>
+<link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet"/>
+<script src="js/bootstrap-datetimepicker.min.js"></script>
+<script src="js/progresstimer.js"></script>
+<script src="js/banktranfer.js"></script>
+
 <!-- InstanceEndEditable -->
 </head>
 
@@ -84,58 +65,26 @@
 <!-- InstanceBeginEditable name="content" -->
 <div class="col-sm-12">
 	<div class="panel panel-info">
-        <div class="panel-heading">รายชื่อผู้สมัครสมาชิก</div>
+        <div class="panel-heading">
+        	<div class="row">
+        	<div class="col-sm-6">
+            	<h4>รายการโอนเงิน</h4>
+            </div>
+            <div class="col-sm-6" align="right">
+            	<button id="btn_addbanktranfer"><h4 class="glyphicon glyphicon-plus-sign text-success" style="vertical-align:middle ;min-height:10px;line-height:10px;"></h4> เพิ่มรายการโอนเงิน</button>
+            </div>
+        	</div>
+        </div>
         <div class="panel-body">
-            <div class="row">
-            <form id="listregister-form">
-            <table class="table table-striped">
-            	<tr>
-                	<th>#</th>
-                    <th>ชื่อ</th>
-                    <th>เบอร์โทร</th>
-                    <th>เพิ่ม / ลบ</th>
-                </tr>
-                <?php
-					$strSQL = "SELECT* FROM tb_register WHERE r_status = 0";
-					$res = $mysqli->query($strSQL);
-					$numcount = 1;
-					while($row = $res->fetch_array(MYSQLI_ASSOC))
-					{
-				?>
-                		<tr>
-                            <td><?php echo $numcount?></td>
-                            <td><?php echo $row['r_name']?></td>
-                            <td><?php echo $row['r_tel']?></td>
-                            <td><button type="button" value="<?php echo $row['r_id'] ?>" id="add">
-                                	<span class="glyphicon glyphicon-plus" aria-hidden="true" style="padding:3px;"></span>
-                                </button> 
-                                / 
-                                <button type="button" value="<?php echo $row['r_id'] ?>" id="remove">
-                                	<span class="glyphicon glyphicon-trash" aria-hidden="true"style="padding:3px;"></span>
-                                    </button></td>
-                        </tr>
-                <?php
-						$numcount++;
-					}
-				?>
-             
-            </table>
-            </form>
-            <!-- modalConfirm -->
-            <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" id="modalConfirm">
-              <div class="modal-dialog modal-sm">
-                <div class="modal-content" style="padding:10px;" align="center">
-                    <div id="labelprogressbar" class="bg-warning" align="center">ยืนยันทำรายการ</div><br />
-                    <div class="loading-progress"></div>
-                    <button type="button" class="btn btn-success" data-dismiss="modal" id="confirm" >ตกลง</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal" id="cancle" >ยกเลิก</button>
-                </div>
-              </div>
-            </div>
-            <!-- end modalConfirm -->
-            </div>
         </div>
     </div>
+</div>
+<div class="modal fade" tabindex="-1" role="dialog" id="modal">
+  <div class="modal-dialog">
+    <div class="modal-content" id="modal-content">
+      
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
 </div>
 <!-- InstanceEndEditable -->
 </body>

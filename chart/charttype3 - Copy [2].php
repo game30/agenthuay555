@@ -41,7 +41,7 @@ for($i = 0; $i < $numlabel; $i++)
 {
 	if($labels[$i] == $row['bill_number'])
 	{
-		$data[$i] = ''.$row['betplay'];
+		$data[$i] = ''.$row['bill_number'];
 		$row = $res->fetch_array(MYSQLI_ASSOC);
 	}
 	else
@@ -61,7 +61,7 @@ for($i = 0; $i < $numlabel; $i++)
 {
 	if($labels[$i] == $row['bill_number'])
 	{
-		$data1[$i] = ''.$row['betplay'];
+		$data1[$i] = ''.$row['bill_number'];
 		$row = $res->fetch_array(MYSQLI_ASSOC);
 	}
 	else
@@ -110,7 +110,7 @@ $layer->setLineWidth(3);
 
 # Add 3 data series to the line layer
 $dataSetObj = $layer->addDataSet($data, 0x0000ff, "4 ตัวเต็ง");
-$dataSetObj1 = $layer->addDataSet($data1, 0xff0000, "4 ตัวโต๊ด");
+$dataSetObj1 = $layer->addDataSet($data1, 0x00ff00, "4 ตัวโต๊ด");
 
 /************/
 # Set the labels on the x axis

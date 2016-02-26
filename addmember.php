@@ -71,7 +71,6 @@
           	<li><a href="configstatus.php">ตั้งค่าสถานะเว็บ</a></li>
             <li><a href="configlot.php">ตั้งค่างวดต่อไป</a></li>
             <li><a href="configaddbank.php">เพิ่มบัญชีธนาคาร</a></li>
-            <li><a href="listmember.php">รายชื่อสมาชิก</a></li>
           </ul>
         </li>
         <li class="dropdown">
@@ -82,7 +81,8 @@
             <li><a href="listmember.php">รายชื่อสมาชิก</a></li>
           </ul>
         </li>
-        
+        <li><a href="report.php">รายงาน</a></li>
+        <li><a href="banktransfer.php">รายการโอนเงิน</a></li>
       </ul>
     </div>
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -92,10 +92,6 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog"></span> ข้อมูลส่วนตัว<span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" class="divider"></li>
             <li><a href="logout.php"><span class="glyphicon glyphicon-off"></span> ออกจากระบบ</a></li>
           </ul>
         </li>

@@ -8,6 +8,8 @@ $mysqli = $dbconn->conn();
 
 $data = array();
 $data1 = array();
+$data2 = array();
+$data3 = array();
 $labels = array();
 
 
@@ -18,7 +20,7 @@ $labels = array();
 			
 $strSQL = "SELECT * ,SUM(bill_bet) AS betplay
 			FROM tb_bill 
-			WHERE lot_type_id = 3 OR lot_type_id = 4  
+			WHERE lot_type_id = 14 OR lot_type_id = 15 
 			GROUP BY tb_bill.bill_number ";
 $res = $mysqli->query($strSQL);
 $numarray = 0;
@@ -32,7 +34,7 @@ while($row = $res->fetch_array(MYSQLI_ASSOC))
 
 $strSQL = "SELECT * ,SUM(bill_bet) AS betplay
 			FROM tb_bill 
-			WHERE lot_type_id = 3 
+			WHERE lot_type_id = 14 
 			GROUP BY tb_bill.bill_number ";
 $res = $mysqli->query($strSQL);
 $numarray = 0;
@@ -52,7 +54,7 @@ for($i = 0; $i < $numlabel; $i++)
 
 $strSQL = "SELECT * ,SUM(bill_bet) AS betplay
 			FROM tb_bill 
-			WHERE lot_type_id = 4 
+			WHERE lot_type_id = 15
 			GROUP BY tb_bill.bill_number ";
 $res = $mysqli->query($strSQL);
 $numarray = 0;
@@ -69,14 +71,12 @@ for($i = 0; $i < $numlabel; $i++)
 		$data1[$i] = '0';
 	}
 }
-		
-		
 
 
 # Create a XYChart object of size 300 x 180 pixels, with a pale yellow (0xffffc0) background, a
 # black border, and 1 pixel 3D border effect.
 $c = new XYChart(800, 250, Transparent,	Transparent, 0);
-$c->addTitle("รายงานการซื้อหวย 4 ตัว", "Tahoma.ttf", 14, 0x0000ff);
+$c->addTitle("รายงานการซื้อหวยเลขขวิ่ง", "Tahoma.ttf", 14, 0x0000ff);
 # Set the plotarea at (45, 35) and of size 240 x 120 pixels, with white background. Turn on both
 # horizontal and vertical grid lines with light grey color (0xc0c0c0)
 $c->setPlotArea(60, 30, 700,180, 0xffffff, -1, -1, 0xc0c0c0, -1);
@@ -106,11 +106,11 @@ $c->yAxis->setTitle("(บาท)", "Tahoma.ttf", 10, 0x555555);
 
 # Add a line layer to the chart with 3-pixel line width
 $layer = $c->addLineLayer2();
-$layer->setLineWidth(3);
+$layer->setLineWidth(1);
 
 # Add 3 data series to the line layer
-$dataSetObj = $layer->addDataSet($data, 0x0000ff, "4 ตัวเต็ง");
-$dataSetObj1 = $layer->addDataSet($data1, 0xff0000, "4 ตัวโต๊ด");
+$dataSetObj = $layer->addDataSet($data, 0x0000ff, "1 ตัววิ่งบน");
+$dataSetObj1 = $layer->addDataSet($data1, 0xff0000, "1 ตัววิ่งล่าง");
 
 /************/
 # Set the labels on the x axis
@@ -121,14 +121,15 @@ $c->xAxis->setTitlePos(6);
 
 $dataSetObj->setDataSymbol(CircleShape, 7);
 $dataSetObj1->setDataSymbol(CircleShape, 7);
+
 $legend = $c->getLegend();
 $legend->setFontStyle("Tahoma.ttf");
 $legend->setFontSize(10);
 
 
 # Enable data label on the data points. Set the label format to nn%.
-$layer->setDataLabelFormat("{value|,.} บาท");
-$layer->setDataLabelStyle("Tahoma.ttf", 7, 0x000000,45);
+/*$layer->setDataLabelFormat("{value|,.} บาท");
+$layer->setDataLabelStyle("Tahoma.ttf", 7, 0x000000,45);*/
 /***********/
 
 # Output the chart
