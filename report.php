@@ -80,7 +80,33 @@
   </div><!-- /.container-fluid -->
 </nav>
 <!-- InstanceBeginEditable name="content" -->
-<img src="chart/chart.php" />
+<div class="col-sm-12">
+	<div class="panel panel-info">
+        <div class="panel-heading"><h4>รายงาน</h4></div>
+        <div class="panel-body">
+        	<div class="row">
+            	<div class="col-sm-12">
+        			<img src="chart/charttype1.php" class="img-responsive img-rounded" width="100%" style="max-height:180px;"/>
+                </div>
+            </div>
+            <div class="row">
+            	<div class="col-sm-12">
+        			<img src="chart/charttype2.php" class="img-responsive img-rounded" width="100%" style="max-height:180px;"/>
+                </div>
+            </div>
+            <div class="row">
+            	<div class="col-sm-12">
+        			<img src="chart/charttype3.php" class="img-responsive img-rounded" width="100%" style="max-height:180px;"/>
+                </div>
+            </div>
+            <div class="row">
+            	<div class="col-sm-12">
+        			<img src="chart/charttype7.php" class="img-responsive img-rounded" width="100%" style="max-height:180px;"/>
+                </div>
+            </div>
+     	</div>
+     </div>
+</div>
 <!-- InstanceEndEditable -->
 </body>
 <!-- InstanceEnd --></html>
