@@ -82,32 +82,32 @@
         <div class="panel-body">
         	<div class="row">
             	<div class="col-sm-12">
-        			<img src="chart/charttype1.php" class="img-responsive img-rounded" width="100%" style="max-height:180px;max-width:800px;"/>
+        			<img src="chart/charttype1.php" class="img-responsive img-rounded" style="max-height:250px;max-width:800px;"/>
                 </div>
             </div>
             <div class="row">
             	<div class="col-sm-12">
-        			<img src="chart/charttype2.php" class="img-responsive img-rounded" width="100%" style="max-height:180px;max-width:800px;"/>
+        			<img src="chart/charttype2.php" class="img-responsive img-rounded" style="max-height:250px;max-width:800px;"/>
                 </div>
             </div>
             <div class="row">
             	<div class="col-sm-12">
-        			<img src="chart/charttype3.php" class="img-responsive img-rounded" width="100%" style="max-height:180px;max-width:800px;"/>
+        			<img src="chart/charttype3.php" class="img-responsive img-rounded" style="max-height:250px;max-width:800px;"/>
                 </div>
             </div>
             <div class="row">
             	<div class="col-sm-12">
-        			<img src="chart/charttype56789.php" class="img-responsive img-rounded" width="100%" style="max-height:180px;max-width:800px;"/>
+        			<img src="chart/charttype56789.php" class="img-responsive img-rounded" style="max-height:250px;max-width:800px;"/>
                 </div>
             </div>
             <div class="row">
             	<div class="col-sm-12">
-        			<img src="chart/charttype10111213.php" class="img-responsive img-rounded" width="100%" style="max-height:180px;max-width:800px;"/>
+        			<img src="chart/charttype10111213.php" class="img-responsive img-rounded" style="max-height:250px;max-width:800px;"/>
                 </div>
             </div>
             <div class="row">
             	<div class="col-sm-12">
-        			<img src="chart/charttype1415.php" class="img-responsive img-rounded" width="100%" style="max-height:180px;max-width:800px;"/>
+        			<img src="chart/charttype1415.php" class="img-responsive img-rounded" style="max-height:250px;max-width:800px;"/>
                 </div>
             </div>
      	</div>

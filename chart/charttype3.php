@@ -76,18 +76,18 @@ for($i = 0; $i < $numlabel; $i++)
 # Create a XYChart object of size 300 x 180 pixels, with a pale yellow (0xffffc0) background, a
 # black border, and 1 pixel 3D border effect.
 $c = new XYChart(800, 250, Transparent,	Transparent, 0);
-$c->addTitle("รายงานการซื้อหวย 4 ตัว", "Tahoma.ttf", 14, 0x0000ff);
+$c->addTitle("รายงานการซื้อหวย 4 ตัว", "tahomabd.ttf", 10, 0x0000ff);
 # Set the plotarea at (45, 35) and of size 240 x 120 pixels, with white background. Turn on both
 # horizontal and vertical grid lines with light grey color (0xc0c0c0)
-$c->setPlotArea(60, 30, 700,180, 0xffffff, -1, -1, 0xc0c0c0, -1);
+$c->setPlotArea(60, 30, 700,170, 0xffffff, -1, -1, 0xc0c0c0, -1);
 # Add a legend box with horizontal layout above the plot area at (70, 35). Use 12pt Arial font,
 # transparent background and border, and line style legend icon.
-$b = $c->addLegend(70, 35, false, "arial.ttf", 12);
+$b = $c->addLegend(70, 35, false, "tahoma.ttf", 12);
 $b->setBackground(Transparent, Transparent);
 $b->setLineStyleKey();
 
 # Set axis label font to 12pt Arial
-$c->xAxis->setLabelStyle("arial.ttf", 10);
+$c->xAxis->setLabelStyle("tahoma.ttf", 10);
 
 # Set the x and y axis stems to transparent, and the x-axis tick color to grey (0xaaaaaa)
 $c->xAxis->setColors(Transparent, TextColor, TextColor, 0xaaaaaa);
@@ -102,7 +102,7 @@ $c->yAxis->setTickDensity(40);
 $c->yAxis->setTitlePos(10);
 
 # Add a title to the y axis using dark grey (0x555555) 14pt Arial font
-$c->yAxis->setTitle("(บาท)", "Tahoma.ttf", 10, 0x555555);
+$c->yAxis->setTitle("(บาท)", "tahoma.ttf", 10, 0x555555);
 
 # Add a line layer to the chart with 3-pixel line width
 $layer = $c->addLineLayer2();
@@ -115,20 +115,20 @@ $dataSetObj1 = $layer->addDataSet($data1, 0xff0000, "4 ตัวโต๊ด");
 /************/
 # Set the labels on the x axis
 $c->xAxis->setLabels($labels);
-$c->xAxis->setLabelStyle("Tahoma.ttf", 8, 0x000000,0);
-$c->xAxis->setTitle("(เลข)", "Tahoma.ttf", 10, 0x555555);
+$c->xAxis->setLabelStyle("tahoma.ttf", 8, 0x000000,90);
+$c->xAxis->setTitle("(เลข)", "tahoma.ttf", 10, 0x555555);
 $c->xAxis->setTitlePos(6);
 
 $dataSetObj->setDataSymbol(CircleShape, 7);
 $dataSetObj1->setDataSymbol(CircleShape, 7);
 $legend = $c->getLegend();
-$legend->setFontStyle("Tahoma.ttf");
+$legend->setFontStyle("tahoma.ttf");
 $legend->setFontSize(10);
 
 
 # Enable data label on the data points. Set the label format to nn%.
 $layer->setDataLabelFormat("{value|,.} บาท");
-$layer->setDataLabelStyle("Tahoma.ttf", 7, 0x000000,45);
+$layer->setDataLabelStyle("tahoma.ttf", 7, 0x000000,45);
 /***********/
 
 # Output the chart

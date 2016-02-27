@@ -76,7 +76,7 @@ for($i = 0; $i < $numlabel; $i++)
 # Create a XYChart object of size 300 x 180 pixels, with a pale yellow (0xffffc0) background, a
 # black border, and 1 pixel 3D border effect.
 $c = new XYChart(800, 250, Transparent,	Transparent, 0);
-$c->addTitle("รายงานการซื้อหวย 4 ตัว", "Tahoma.ttf", 14, 0x0000ff);
+$c->addTitle("รายงานการซื้อหวย 4 ตัว", "tahomabd.ttf", 10, 0x0000ff);
 # Set the plotarea at (45, 35) and of size 240 x 120 pixels, with white background. Turn on both
 # horizontal and vertical grid lines with light grey color (0xc0c0c0)
 $c->setPlotArea(60, 30, 700,180, 0xffffff, -1, -1, 0xc0c0c0, -1);
