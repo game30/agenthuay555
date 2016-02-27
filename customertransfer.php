@@ -11,19 +11,6 @@
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="js/bootstrap.js"></script>
 <!-- InstanceBeginEditable name="head" -->
-<link href="css/bootstrap-switch.min.css" rel="stylesheet" />
-<script src="js/bootstrap-switch.min.js"></script>
-<script>
-$(document).ready(function(e) {
-    $('.switch').bootstrapSwitch({
-		onText : 'เปิด',
-		offText : 'ปิด',
-		onColor : 'success',
-		offColor : 'danger'
-	});
-});
-
-</script>
 <!-- InstanceEndEditable -->
 </head>
 
@@ -72,29 +59,7 @@ $(document).ready(function(e) {
   </div><!-- /.container-fluid -->
 </nav>
 <!-- InstanceBeginEditable name="content" -->
-<div class="col-sm-12">
-	<div class="panel panel-info">
-        <div class="panel-heading"><h4>ตั้งค่าสถานะเว็บไซต์</h4></div>
-        <div class="panel-body">
-        	<form class="form-horizontal">
-              <div class="form-group">
-                <label for="statusweb" class="col-sm-2 control-label">ตั้งค่าสถานะเว็บไซต์</label>
-                <div class="col-sm-10">
-                  <input name="statusweb" class="switch" type="checkbox" value="" />
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="statusbet" class="col-sm-2 control-label">ตั้งค่าสถานะรับแทง</label>
-                <div class="col-sm-10">
-                  <input name="statusbet" class="switch" type="checkbox" value="" />
-                </div>
-              </div>
-              
-            </form>
-			
-		</div>
-    </div>
-</div>
+content
 <!-- InstanceEndEditable -->
 </body>
 <!-- InstanceEnd --></html>
