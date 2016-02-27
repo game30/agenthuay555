@@ -53,7 +53,7 @@ $(document).ready(function(e) {
           </ul>
         </li>
         <li><a href="report.php">รายงาน</a></li>
-        <li><a href="customertransfer.php">รายการโอนเงิน</a></li>
+        <li><a href="customertransfer.php">แจ้งโอนเงิน</a></li>
         <li><a href="banktransfer.php">รายการโอนเงิน</a></li>
       </ul>
     </div>
