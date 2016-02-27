@@ -12,7 +12,9 @@
 <script src="js/bootstrap.js"></script>
 <!-- InstanceBeginEditable name="head" -->
 <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet"/>
+<link href="css/datepicker.css" rel="stylesheet"/>
 <script src="js/bootstrap-datetimepicker.min.js"></script>
+<script src="js/bootstrap-datepicker.js"></script>
 <script src="js/progresstimer.js"></script>
 <script src="js/banktranfer.js"></script>
 
@@ -76,6 +78,20 @@
         	</div>
         </div>
         <div class="panel-body">
+        <form class="form-inline">
+          <div class="form-group">
+            	<label for="exampleInputName2">ตั้งแต่วันที่</label>
+          </div>
+          <div class="form-group">
+                <div class="input-daterange input-group" id="datepicker">
+                    <input type="text" class="input-sm form-control" id="start" name="start" />
+                    <span class="input-group-addon">ถึง</span>
+                    <input type="text" class="input-sm form-control" id="end" name="end"/>
+                </div>
+          </div>
+          <button type="button" class="btn btn-success" id="btn_display_bank_tranfer">แสดง</button>
+        </form>
+        <div id="body_display_bank_tranfer"></div>
         </div>
     </div>
 </div>

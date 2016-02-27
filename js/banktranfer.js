@@ -2,6 +2,8 @@
 $(document).ready(function(e) {
 	var progress ="" ;
 	
+
+
 	$.fn.datetimepicker.dates['th'] = {
 		days: ["อาทิตย์", "จันทร์", "อังคาร", "พุธ", "พฤหัส", "ศุกร์", "เสาร์", "อาทิตย์"],
 		daysShort: ["อา", "จ", "อ", "พ", "พฤ", "ศ", "ส", "อา"],
@@ -13,11 +15,49 @@ $(document).ready(function(e) {
 		meridiem: '',
 	};
 	
+	$('#datepicker .input-sm').datepicker({
+		format: 'yyyy-mm-dd',
+		autoclose: true,
+		language: 'th',
+	});
+		
 	function loading_show(){
 		progress = $(".addbank_loading-progress").progressTimer({		
 			timeLimit: 2,
 		});
 	}
+	function loading_modal_show(){
+		$("#modal-content").html('');
+		$("#modal").modal('show');
+		
+		progress = $(".addbank_loading-progress").progressTimer({		
+			timeLimit: 2,
+		});
+	}
+	
+	// แสดงตาราง //
+	$(document).on('click',"#btn_display_bank_tranfer", function(){
+		loading_modal_show();
+		$.ajax({
+			type: "POST",
+			url: "ajax/ajax.banktranferlist.php",
+			data: "page=1",
+		}).error(function(){
+			progress.progressTimer('error', {
+				errorText:'ERROR!',
+				onFinish:function(){
+					alert('There was an error processing your information!');
+				}
+			});
+		}).done(function(msg){
+			$('#body_display_bank_tranfer').html(msg);
+			/*progress.progressTimer('complete', {
+				onFinish: function () {
+					$(".addbank_loading-progress").hide();
+				}
+			});*/
+		});
+	});
 	
 	$(document).on('click',"#btn_save_bk_transfer", function(){
 		loading_show();
