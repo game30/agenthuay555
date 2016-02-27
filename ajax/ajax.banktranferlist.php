@@ -2,6 +2,7 @@
 session_start(); 
 include (dirname(__FILE__)."/../config/config_db.php");
 include (dirname(__FILE__)."/../config/config.inc.php");
+include (dirname(__FILE__)."/../fucntion/convertdatethai.php");
 $dbconn = new connect_db;
 $mysqli = $dbconn->conn();
 	
@@ -20,51 +21,35 @@ if($_POST['page'])
 	
 	
 	?>
-   
-	<div class="panel panel-info">
-        <div class="panel-heading"><h4>รายชื่อสมาชิก</h4></div>
-        <div class="panel-body">
-            <div class="row">
             <form id="listregister-form">
-            <table class="table table-striped input-sm">
+            <table class="table table-striped">
             	<tr>
                 	<th>#</th>
-                    <th>รหัสผู้ใช้ (ชื่อ-นามสกุล)</th>
-                    <th>เครดิต</th>
-                    <th>เบอร์โทร</th>
-                    <th>อีเมล์</th>
-                    <th><div align="center">ประวิตการใช้งาน</div></th>
-                    <th>แก้ไข</th>
-                    <th><div align="center">เปลี่ยนรหัสผ่าน</div></th>
+                    <th>บัญชีธนาคาร</th>
+                    <th>ยอดเงิน</th>
+                    <th>วันเวลา</th>
+                    <th>รหัสผู้ใช้</th>
+                    <th>สถานะ</th>
                 </tr>
                 <?php
-					$strSQL = "SELECT* FROM tb_member 
-								INNER JOIN tb_credit ON tb_member.id = tb_credit.m_id 
-								WHERE parent = $_SESSION[userid] LIMIT $start, $per_page";
+					$strSQL = "SELECT * FROM tb_bank_transfer 
+								INNER JOIN tb_member ON tb_member.id = tb_bank_transfer.m_id 
+								INNER JOIN tb_bank ON tb_bank.b_id = tb_bank_transfer.bank_id 
+								WHERE tb_bank_transfer.bk_transfer_date BETWEEN '$_REQUEST[start] 00:00:00' AND '$_REQUEST[end] 23:59:00' 
+								LIMIT $start, $per_page";
 					$res = $mysqli->query($strSQL);
-					
+					//echo $strSQL;
 					while($row = $res->fetch_array(MYSQLI_ASSOC))
 					{
 						
 				?>
                 		<tr>
                             <td><?php echo $numcount?><div id="nameError"></div></td>
-                            <td><?php echo "<strong>".$row['username'].'</strong> ('.$row['name'].')'?></td>
-                            <td>
-                            	<div class="form-inline">
-                            		<div class="form-group">
-                                    	<input name="credit_<?php echo $row['id']?>" id="credit_<?php echo $row['id']?>" type="text" class="credit form-control" value="<?php echo $row['credit']?>" maxlength="9" size="12" disabled="disabled"/>
-                                        <div id="credit_<?php  echo $row['id'] ?>_error" class="small"></div>
-                                 	</div>
-                                  	<button type="button" value="<?php echo $row['id'] ?>" class="addcredit btn btn-info btn-xs glyphicon glyphicon-transfer" id="addcredit"></button>
-                                    <button type="button" value="<?php echo $row['id'] ?>" class="savecredit btn btn-success btn-xs glyphicon glyphicon-floppy-save" name="savecredit_<?php echo $row['id'] ?>" id="savecredit"></button>
-                            	</div>
-                            </td>
-                            <td><?php echo $row['tell']?></td>
-                            <td><?php echo $row['email']?></td>
-                            <td align="center"><a data-toggle="modal" href="modal/modal.creditrefund.php" data-target="#terms" class="refund" value="<?php echo $row['id'] ?>">รายละเอียด</a></td>
-                            <td><button type="button" value="<?php echo $row['id'] ?>" id="editprofile" class="btn btn-primary btn-xs glyphicon glyphicon-edit" ></button></td>
-                            <td align="center"><button type="button" value="<?php echo $row['id'] ?>" id="resetpassword" class="btn btn-danger btn-xs glyphicon glyphicon-lock"></button></td>
+                            <td><?php echo "<strong>".$row['b_name'].'</strong> ('.$row['b_number'].')'?></td>
+                            <td><?php echo $row['bk_transfer_amount']?></td>
+                            <td><?php echo thai_date_time_short(strtotime($row['bk_transfer_date']))?></td>
+                            <td><?php echo $row['username']?></td>
+                            <td><?php echo $row['bk_transfer_status']?></td>
                         </tr>
                 <?php
 						$numcount++;
@@ -73,16 +58,14 @@ if($_POST['page'])
              
             </table>
             </form>
-            
-
-        </div>
-    </div>
-</div>
     
     <?php
 
 	/* --------------------------------------------- */
-	$query_pag_num = "SELECT COUNT(*) AS count FROM tb_member WHERE parent = $_SESSION[userid] ";
+	$query_pag_num = "SELECT COUNT(*) AS count FROM tb_bank_transfer 
+								INNER JOIN tb_member ON tb_member.id = tb_bank_transfer.m_id 
+								INNER JOIN tb_bank ON tb_bank.b_id = tb_bank_transfer.bank_id 
+								WHERE tb_bank_transfer.bk_transfer_date BETWEEN '$_REQUEST[start] 00:00:00' AND '$_REQUEST[end] 23:59:00' ";
 	$result_pag_num = $mysqli->query($query_pag_num);
 	
 	$row = $result_pag_num->fetch_array(MYSQLI_ASSOC);
@@ -161,7 +144,7 @@ if($_POST['page'])
 	}
 	//$goto = "<input type='text' class='goto' size='1' style='margin-top:-1px;margin-left:60px;'/><input type='button' id='go_btn' class='go_button' value='Go'/>";
 	$total_string = "<span class='total' a='$no_of_paginations'>Page <b>" . $cur_page . "</b> of <b>$no_of_paginations</b></span>";
-	$msg = $msg . "</ul>"  . $total_string . "</nav>";  // Content for pagination
+	$msg = $msg . "</ul></nav>$total_string ";  // Content for pagination
 	echo $msg;
 }
 ?>

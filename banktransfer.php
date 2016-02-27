@@ -16,6 +16,7 @@
 <script src="js/bootstrap-datetimepicker.min.js"></script>
 <script src="js/bootstrap-datepicker.js"></script>
 <script src="js/progresstimer.js"></script>
+<script src="js/sprintf.js"></script>
 <script src="js/banktranfer.js"></script>
 
 <!-- InstanceEndEditable -->
@@ -91,7 +92,7 @@
                 </div>
           </div>
           <button type="button" class="btn btn-success" id="btn_display_bank_tranfer">แสดง</button>
-        </form>
+        </form><br />
         <div id="body_display_bank_tranfer"></div>
         </div>
     </div>
@@ -99,7 +100,7 @@
 <div class="modal fade" tabindex="-1" role="dialog" id="modal">
   <div class="modal-dialog">
     <div class="modal-content" id="modal-content">
-      
+    	
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div>

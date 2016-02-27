@@ -1,8 +1,10 @@
-// JavaScript Document
+
+
 $(document).ready(function(e) {
 	var progress ="" ;
+	var page = 1;
 	
-
+	$("#modal_progress").hide();
 
 	$.fn.datetimepicker.dates['th'] = {
 		days: ["อาทิตย์", "จันทร์", "อังคาร", "พุธ", "พฤหัส", "ศุกร์", "เสาร์", "อาทิตย์"],
@@ -15,6 +17,17 @@ $(document).ready(function(e) {
 		meridiem: '',
 	};
 	
+	var today = new Date();
+	var dd = today.getDate();
+	var mm = today.getMonth()+1; //January is 0!
+	var yyyy = today.getFullYear();
+	var d = new Date();
+	var dateStr = sprintf('%d-%02d-%02d',yyyy,mm,dd);
+
+	
+	$("#start").val(dateStr);
+	$("#end").val(dateStr);
+
 	$('#datepicker .input-sm').datepicker({
 		format: 'yyyy-mm-dd',
 		autoclose: true,
@@ -27,21 +40,27 @@ $(document).ready(function(e) {
 		});
 	}
 	function loading_modal_show(){
-		$("#modal-content").html('');
+		$("#modal-content").html('<div id="modal_progress" style="padding:20px;"></div>');
 		$("#modal").modal('show');
-		
-		progress = $(".addbank_loading-progress").progressTimer({		
+		$("#modal_progress").show();
+		progress = $("#modal_progress").progressTimer({		
 			timeLimit: 2,
 		});
 	}
 	
+	function loading_modal_hide(){
+		$("#modal-content").html('');
+		$("#modal").modal('hide');
+	}
+	
 	// แสดงตาราง //
-	$(document).on('click',"#btn_display_bank_tranfer", function(){
+	function display_table()
+	{
 		loading_modal_show();
 		$.ajax({
 			type: "POST",
 			url: "ajax/ajax.banktranferlist.php",
-			data: "page=1",
+			data: "page="+page+"&start="+$("#start").val()+"&end="+$("#end").val(),
 		}).error(function(){
 			progress.progressTimer('error', {
 				errorText:'ERROR!',
@@ -51,12 +70,15 @@ $(document).ready(function(e) {
 			});
 		}).done(function(msg){
 			$('#body_display_bank_tranfer').html(msg);
-			/*progress.progressTimer('complete', {
+			progress.progressTimer('complete', {
 				onFinish: function () {
-					$(".addbank_loading-progress").hide();
+					loading_modal_hide();
 				}
-			});*/
+			});
 		});
+	}
+	$(document).on('click',"#btn_display_bank_tranfer", function(){
+		display_table();
 	});
 	
 	$(document).on('click',"#btn_save_bk_transfer", function(){
@@ -76,6 +98,7 @@ $(document).ready(function(e) {
 			progress.progressTimer('complete', {
 				onFinish: function () {
 					$(".addbank_loading-progress").hide();
+					display_table();
 				}
 			});
 		});
@@ -101,13 +124,12 @@ $(document).ready(function(e) {
 			todayHighlight : true,
 			startDate : new Date(),
 			language: 'th',
-		}).on('changeDate', function(ev){
-			//var str = ev.currentTarget.value;
-			//var res = str.split(" ")[0].replace(/-/g ,'');
-			//$("#lot_num").val(res);
-			//$("#lot_timestamp").val(ev.timeStamp);
-		});
+		})
 		$("#modal").modal('show');
 		
+	});
+	$(document).on( "click",'#body_display_bank_tranfer .pagination li', function() {
+		page = $(this).attr('p');
+		display_table();
 	});
 });
