@@ -207,11 +207,12 @@
            <?php
 		    $dbconn = new connect_db;
 			$mysqli = $dbconn->conn();
+			
 			$strSQL = "SELECT * FROM tb_lottery ORDER BY lot_timeclose DESC LIMIT 0,1";
 			$res = $mysqli->query($strSQL);
 			$num_row = $res->num_rows;
 			$row = $res->fetch_array(MYSQLI_ASSOC);
-			if($row['lot_status'] != 0 || $num_row == 0)
+			if($row['lot_status'] == 2 || $num_row == 0)
 			{
 			?>
               <div class="form-group">
@@ -233,7 +234,8 @@
 			else
 			{
 			?>
-            	<div class="alert alert-danger" role="alert"><p class="glyphicon glyphicon-exclamation-sign"></p> งวดปัจจุบันยังไม่ปิดรับแทง</div>
+            	<div class="alert alert-danger" role="alert"><p class="glyphicon glyphicon-exclamation-sign">
+                </p> <?php echo ($row['lot_status'] == 0)?"งวดปัจจุบันยังไม่ปิดรับแทง":"งวดปัจจุบันยังไม่ได้ทำการตรวจรางวัล";?></div>
                 <div class="form-group">
                     <label for="statusweb" class="col-sm-2 control-label">วัน เวลาปิดงวดต่อไป</label>
                     <div class="col-sm-10">
@@ -243,7 +245,7 @@
                 <div class="form-group">
                 	<label for="statusbet" class="col-sm-2 control-label">สถานะรับแทง</label>
                 	<div class="col-sm-10">
-                		<input name="statusbet" class="switch" type="checkbox" <?php echo  $row['lot_status'] == 0? 'checked="checked"':''; ?>  id="statusbet" />
+                		<input name="statusbet" class="switch" type="checkbox" <?php echo  $row['lot_status'] == 0? 'checked="checked"':''; ?>  id="statusbet" <?php echo ($row['lot_status'] == 0)?"":"disabled='disabled'";?> />
                 	</div>
                 </div>
             <?php

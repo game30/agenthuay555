@@ -21,6 +21,7 @@ if($_POST['page'])
 	
 	
 	?>
+    
             <form id="listregister-form">
             <table class="table table-striped">
             	<tr>
